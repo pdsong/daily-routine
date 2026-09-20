@@ -12,15 +12,50 @@
         </p>
       </div>
 
-      <button
-        type="button"
-        class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-500/20 active:scale-95 transition-all"
-        @click="openAddModal"
-      >
-        <IconRenderer name="Plus" :size="16" />
-        <span>新建事项</span>
-      </button>
+      <div class="flex items-center space-x-2">
+        <button
+          type="button"
+          class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1 border border-slate-700/80 active:scale-95 transition-all"
+          title="重新添加 4 个经典默认事项"
+          @click="seedDefaults"
+        >
+          <IconRenderer name="Sparkles" :size="14" class="text-amber-400" />
+          <span>恢复默认任务</span>
+        </button>
+
+        <button
+          type="button"
+          class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-500/20 active:scale-95 transition-all"
+          @click="openAddModal"
+        >
+          <IconRenderer name="Plus" :size="16" />
+          <span>新建事项</span>
+        </button>
+      </div>
     </header>
+
+    <!-- Quick Template Bar -->
+    <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-3">
+      <div class="flex items-center justify-between mb-2">
+        <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
+          <IconRenderer name="Zap" :size="14" class="text-amber-400" />
+          <span>快速添加常用任务</span>
+        </span>
+        <span class="text-[11px] text-slate-500">点击直接创建</span>
+      </div>
+      <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
+        <button
+          v-for="tpl in quickPresets"
+          :key="tpl.title"
+          type="button"
+          class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs text-slate-200 whitespace-nowrap border border-slate-700/60 transition-all active:scale-95 flex-shrink-0"
+          @click="createFromTemplate(tpl)"
+        >
+          <IconRenderer :name="tpl.icon" :size="14" :class="getColorText(tpl.color)" />
+          <span>{{ tpl.title }}</span>
+        </button>
+      </div>
+    </div>
 
     <!-- Habits Count & Helper banner -->
     <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between text-xs">
@@ -183,6 +218,78 @@ onMounted(() => {
   loadHabits()
 })
 
+const quickPresets = [
+  {
+    title: '英语跟读任务',
+    category: 'study',
+    type: 'time_slot',
+    start_time: '08:00',
+    end_time: '08:30',
+    icon: 'Headphones',
+    color: 'sky',
+    description: '晨间专注跟读发音 30 分钟',
+    repeat_type: 'daily'
+  },
+  {
+    title: '晨跑运动',
+    category: 'fitness',
+    type: 'time_slot',
+    start_time: '08:30',
+    end_time: '09:30',
+    icon: 'Flame',
+    color: 'emerald',
+    description: '每日户外/跑步机晨跑 1 小时',
+    repeat_type: 'daily'
+  },
+  {
+    title: '深度阅读',
+    category: 'study',
+    type: 'quantified_log',
+    target_metric: 'pages',
+    target_value: 20,
+    icon: 'BookOpen',
+    color: 'amber',
+    description: '自由时间记录书名、页数与阅读时长',
+    repeat_type: 'daily'
+  },
+  {
+    title: '自律断舍离 (不吃零食/不喝汽水)',
+    category: 'self_discipline',
+    type: 'abstinence',
+    icon: 'ShieldCheck',
+    color: 'purple',
+    description: '保持自律，抵制垃圾食品与含糖饮料',
+    repeat_type: 'daily'
+  },
+  {
+    title: '今日不吃晚饭 (轻断食)',
+    category: 'self_discipline',
+    type: 'abstinence',
+    icon: 'ShieldCheck',
+    color: 'purple',
+    description: '轻断食自律，今日不吃晚饭',
+    repeat_type: 'daily'
+  }
+]
+
+const createFromTemplate = async (tpl: any) => {
+  await handleSave(tpl)
+}
+
+const seedDefaults = async () => {
+  if (confirm('是否添加/补齐 4 项经典预设事项（英语跟读、晨跑、深度阅读、自律断舍离）？')) {
+    try {
+      loading.value = true
+      await $fetch('/api/habits/seed-defaults', { method: 'POST' })
+      await loadHabits()
+    } catch (err) {
+      console.error('Failed to seed defaults', err)
+    } finally {
+      loading.value = false
+    }
+  }
+}
+
 const openAddModal = () => {
   selectedHabit.value = null
   isModalOpen.value = true
@@ -191,6 +298,18 @@ const openAddModal = () => {
 const openEditModal = (habit: any) => {
   selectedHabit.value = habit
   isModalOpen.value = true
+}
+
+const getColorText = (color: string) => {
+  switch (color) {
+    case 'sky': return 'text-sky-400'
+    case 'emerald': return 'text-emerald-400'
+    case 'rose': return 'text-rose-400'
+    case 'amber': return 'text-amber-400'
+    case 'purple': return 'text-purple-400'
+    case 'indigo': return 'text-indigo-400'
+    default: return 'text-emerald-400'
+  }
 }
 
 const handleSave = async (habitData: any) => {

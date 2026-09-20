@@ -27,6 +27,8 @@
     "@types/bcryptjs": "^3.0.0",
     "@types/better-sqlite3": "^9.6.0",
     "@types/canvas-confetti": "^1.9.0",
-    "@types/jsonwebtoken": "^9.0.10"
+    "@types/jsonwebtoken": "^9.0.10",
+    "@types/ssh2": "^1.15.6",
+    "ssh2": "^1.17.0"
   }
 }
