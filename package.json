@@ -4,10 +4,9 @@
   "private": true,
   "scripts": {
     "build": "nuxt build",
-    "dev": "nuxt dev --port 3300",
-    "dev:host": "nuxt dev --port 3300 --host 0.0.0.0",
+    "dev": "nuxt dev --port 3300 --host 0.0.0.0",
     "generate": "nuxt generate",
-    "preview": "nuxt preview --port 3300",
+    "preview": "nuxt preview --port 3300 --host 0.0.0.0",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
