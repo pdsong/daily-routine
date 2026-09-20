@@ -33,7 +33,7 @@ export function verifyToken(token: string): { id: number; username: string } | n
 export function setAuthCookie(event: H3Event, token: string) {
   setCookie(event, COOKIE_NAME, token, {
     httpOnly: true,
-    secure: process.env.NODE_ENV === 'production',
+    secure: false, // Set to false to support plain HTTP / IP access
     sameSite: 'lax',
     maxAge: 60 * 60 * 24 * 30, // 30 days
     path: '/'
