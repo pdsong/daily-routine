@@ -24,9 +24,7 @@ logs
 !.env.example
 
 # SQLite Data
-*.db
-*.db-journal
-*.db-wal
-*.sqlite
-server/data/*.db
+*.db*
+*.sqlite*
+server/data/*.db*
 !server/data/.gitkeep
