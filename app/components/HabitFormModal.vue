@@ -73,7 +73,7 @@
               class="w-full bg-slate-950 border border-slate-800 rounded-xl px-3 py-2.5 text-sm text-slate-200 focus:outline-none focus:border-emerald-500"
             >
               <option value="time_slot">🕒 固定时段 (如 08:00-08:30)</option>
-              <option value="reminder_window">🔔 提醒窗口 (如 10:30 吃药)</option>
+              <option value="reminder_window">🔔 目标提醒窗口 (如 22:00 结束)</option>
               <option value="quantified_log">📖 自由定量 (如 阅读/页数)</option>
               <option value="abstinence">🛡️ 自律戒断 (如 不吃晚饭)</option>
               <option value="check_only">✅ 常规一键打卡</option>
@@ -348,17 +348,7 @@ const templates = [
     description: '每日户外/跑步机晨跑 1 小时',
     repeat_type: 'daily'
   },
-  {
-    title: '早晨吃药',
-    category: 'health',
-    type: 'reminder_window',
-    start_time: '08:00',
-    target_time: '10:30',
-    icon: 'Pill',
-    color: 'rose',
-    description: '08:00 起提醒，10:30 前完成服药',
-    repeat_type: 'daily'
-  },
+
   {
     title: '自由阅读',
     category: 'study',

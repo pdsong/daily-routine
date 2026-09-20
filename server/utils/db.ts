@@ -172,23 +172,6 @@ export function seedDefaultHabits(userId: number) {
     },
     {
       user_id: userId,
-      title: '早晨吃药',
-      description: '早晨按时服药（08:00 开始提醒，10:30 截止）',
-      icon: 'Pill',
-      color: 'rose',
-      category: 'health',
-      type: 'reminder_window',
-      start_time: '08:00',
-      end_time: null,
-      target_time: '10:30',
-      target_metric: null,
-      target_value: null,
-      repeat_type: 'daily',
-      repeat_days: '1,2,3,4,5,6,7',
-      sort_order: 3
-    },
-    {
-      user_id: userId,
       title: '深度阅读',
       description: '不限时间，记录读的书名、起止页数与耗时',
       icon: 'BookOpen',
@@ -202,7 +185,7 @@ export function seedDefaultHabits(userId: number) {
       target_value: 20,
       repeat_type: 'daily',
       repeat_days: '1,2,3,4,5,6,7',
-      sort_order: 4
+      sort_order: 3
     },
     {
       user_id: userId,
@@ -219,7 +202,7 @@ export function seedDefaultHabits(userId: number) {
       target_value: null,
       repeat_type: 'daily',
       repeat_days: '1,2,3,4,5,6,7',
-      sort_order: 5
+      sort_order: 4
     }
   ]
 
