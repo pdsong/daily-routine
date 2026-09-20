@@ -69,6 +69,14 @@ export function getDb(): Database.Database {
       UNIQUE(habit_id, date)
     );
 
+    CREATE TABLE IF NOT EXISTS login_attempts (
+      ip TEXT PRIMARY KEY,
+      failed_attempts INTEGER DEFAULT 0,
+      penalty_level INTEGER DEFAULT 0,
+      blocked_until INTEGER DEFAULT 0,
+      last_failed_at INTEGER DEFAULT 0
+    );
+
     CREATE INDEX IF NOT EXISTS idx_habits_user ON habits(user_id, is_archived, sort_order);
     CREATE INDEX IF NOT EXISTS idx_habit_logs_date ON habit_logs(user_id, date);
     CREATE INDEX IF NOT EXISTS idx_habit_logs_habit ON habit_logs(habit_id, date);
