@@ -1,33 +1,33 @@
 <template>
-  <div v-if="isOpen" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-slate-950/80 backdrop-blur-sm transition-opacity">
-    <div class="bg-slate-900 border border-slate-800 w-full max-w-md rounded-t-3xl sm:rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] animate-in slide-in-from-bottom-6 duration-200">
+  <div v-if="isOpen" class="fixed inset-0 z-50 flex items-end sm:items-center justify-center p-0 sm:p-4 bg-black/70 backdrop-blur-md transition-opacity">
+    <div class="haute-glass w-full max-w-md rounded-t-[28px] sm:rounded-3xl shadow-2xl overflow-hidden flex flex-col max-h-[92vh] transition-transform duration-300">
       
       <!-- Header -->
-      <div class="px-5 py-4 border-b border-slate-800 flex items-center justify-between bg-slate-900/80">
+      <div class="px-5 py-4 border-b border-white/[0.08] flex items-center justify-between bg-white/[0.02]">
         <div>
-          <h3 class="text-base font-semibold text-slate-100">{{ isEditing ? '编辑事项' : '新建重复事项 / 习惯' }}</h3>
-          <p class="text-xs text-slate-400">设置时间段、提醒窗口或定量目标</p>
+          <h3 class="text-sm font-bold text-white tracking-tight">{{ isEditing ? '编辑事项' : '新建重复事项 / 习惯' }}</h3>
+          <p class="text-[11px] text-slate-400">设置时间段、提醒窗口或定量目标</p>
         </div>
         <button
-          class="w-8 h-8 rounded-full bg-slate-800 text-slate-400 hover:text-slate-200 flex items-center justify-center transition-colors"
+          class="w-7 h-7 rounded-full bg-white/[0.05] hover:bg-white/[0.1] text-slate-400 hover:text-white flex items-center justify-center transition-colors"
           @click="close"
         >
-          <IconRenderer name="X" :size="16" />
+          <IconRenderer name="X" :size="14" />
         </button>
       </div>
 
       <!-- Quick Templates (Only when creating) -->
-      <div v-if="!isEditing" class="px-5 pt-3 pb-1 border-b border-slate-800/60 bg-slate-950/40">
-        <span class="text-[11px] font-medium text-slate-400 block mb-2">⚡ 快速套用预设模板</span>
-        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-2">
+      <div v-if="!isEditing" class="px-5 pt-3 pb-2 border-b border-white/[0.06] bg-white/[0.01]">
+        <span class="text-[10px] font-medium text-slate-400 block mb-2">⚡ 快速套用预设模板</span>
+        <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
           <button
             v-for="tpl in templates"
             :key="tpl.title"
             type="button"
-            class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-800/90 hover:bg-slate-700/80 text-xs text-slate-200 whitespace-nowrap border border-slate-700/60 transition-all active:scale-95 flex-shrink-0"
+            class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-xs text-slate-200 whitespace-nowrap border border-white/[0.06] hover:border-white/[0.12] transition-all active:scale-95 flex-shrink-0"
             @click="applyTemplate(tpl)"
           >
-            <IconRenderer :name="tpl.icon" :size="14" :class="getColorText(tpl.color)" />
+            <IconRenderer :name="tpl.icon" :size="13" :class="getColorText(tpl.color)" />
             <span>{{ tpl.title }}</span>
           </button>
         </div>
@@ -267,18 +267,18 @@
       </div>
 
       <!-- Action Footer -->
-      <div class="p-4 border-t border-slate-800 bg-slate-900/80 flex items-center space-x-3">
+      <div class="p-4 border-t border-white/[0.08] bg-white/[0.02] flex items-center space-x-3">
         <button
           v-if="isEditing"
           type="button"
-          class="px-4 py-2.5 rounded-xl border border-rose-500/40 text-rose-400 hover:bg-rose-500/10 text-xs font-medium transition-colors"
+          class="px-4 py-2.5 rounded-xl border border-rose-500/30 text-rose-400 hover:bg-rose-500/10 text-xs font-medium transition-colors active:scale-95"
           @click="onDelete"
         >
           删除事项
         </button>
         <button
           type="button"
-          class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition-all shadow-lg shadow-emerald-500/20 active:scale-98"
+          class="flex-1 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold py-2.5 rounded-xl text-sm transition-all shadow-[0_0_20px_rgba(16,185,129,0.35)] active:scale-95"
           @click="save"
         >
           {{ isEditing ? '保存修改' : '确认创建' }}

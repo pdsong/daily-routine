@@ -1,28 +1,28 @@
 <template>
   <div class="space-y-4">
     
-    <!-- Top Header & Date Selector -->
-    <header class="flex items-center justify-between pt-1 pb-2">
+    <!-- Top Header & Profile Status -->
+    <header class="flex items-center justify-between pt-1 pb-1">
       <div>
         <div class="flex items-center space-x-2">
-          <h2 class="text-xl font-bold tracking-tight text-slate-100">
+          <h2 class="text-xl font-bold tracking-tight text-white">
             {{ isToday ? '今日打卡' : formatDateTitle(selectedDate) }}
           </h2>
-          <span v-if="isToday" class="px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 text-[10px] font-semibold">
+          <span v-if="isToday" class="px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-300 text-[10px] font-semibold border border-emerald-500/25">
             Today
           </span>
         </div>
-        <p class="text-xs text-slate-400 mt-0.5">
+        <p class="text-xs text-slate-400 mt-0.5 font-normal">
           {{ user?.username ? `你好，${user.username}` : '坚持自律每一天' }} · {{ getDayOfWeekChinese(selectedDate) }}
         </p>
       </div>
 
       <!-- Quick Action Menu -->
-      <div class="flex items-center space-x-1.5">
+      <div class="flex items-center space-x-2">
         <button
           type="button"
           title="新建事项"
-          class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-emerald-400 hover:bg-emerald-500/10 flex items-center justify-center transition-colors"
+          class="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] hover:border-emerald-400/40 text-emerald-400 hover:bg-emerald-500/10 flex items-center justify-center transition-all duration-200 active:scale-90"
           @click="isFormModalOpen = true; currentEditHabit = null"
         >
           <IconRenderer name="Plus" :size="18" />
@@ -31,33 +31,33 @@
         <button
           type="button"
           title="退出登录"
-          class="w-9 h-9 rounded-xl bg-slate-900 border border-slate-800 text-slate-400 hover:text-rose-400 hover:bg-rose-500/10 flex items-center justify-center transition-colors"
+          class="w-9 h-9 rounded-xl bg-white/[0.04] border border-white/[0.08] text-slate-400 hover:text-rose-400 hover:border-rose-400/30 hover:bg-rose-500/10 flex items-center justify-center transition-all duration-200 active:scale-90"
           @click="handleLogout"
         >
-          <IconRenderer name="LogOut" :size="16" />
+          <IconRenderer name="LogOut" :size="15" />
         </button>
       </div>
     </header>
 
-    <!-- Date Navigator Bar -->
-    <div class="flex items-center justify-between bg-slate-900/90 border border-slate-800 rounded-2xl p-1.5 px-3">
+    <!-- Sleek Date Navigator Bar -->
+    <div class="flex items-center justify-between bg-[#10141e]/70 border border-white/[0.06] rounded-2xl p-1.5 px-3 backdrop-blur-lg">
       <button
-        class="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-colors"
+        class="p-1.5 rounded-xl hover:bg-white/[0.06] text-slate-400 hover:text-slate-200 transition-colors active:scale-95"
         @click="shiftDate(-1)"
       >
-        <IconRenderer name="ChevronLeft" :size="18" />
+        <IconRenderer name="ChevronLeft" :size="17" />
       </button>
 
       <div class="flex items-center space-x-2">
         <input
           v-model="selectedDate"
           type="date"
-          class="bg-transparent text-xs font-semibold text-slate-200 text-center focus:outline-none cursor-pointer"
+          class="bg-transparent text-xs font-semibold text-slate-200 text-center focus:outline-none cursor-pointer tabular-num"
           @change="loadData"
         />
         <button
           v-if="!isToday"
-          class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded-lg border border-emerald-500/30 hover:bg-emerald-500/30 transition-colors"
+          class="text-[10px] bg-emerald-500/15 text-emerald-300 font-medium px-2 py-0.5 rounded-lg border border-emerald-500/30 hover:bg-emerald-500/25 transition-colors"
           @click="goToToday"
         >
           返回今天
@@ -65,10 +65,10 @@
       </div>
 
       <button
-        class="p-1.5 rounded-xl hover:bg-slate-800 text-slate-400 hover:text-slate-200 transition-colors"
+        class="p-1.5 rounded-xl hover:bg-white/[0.06] text-slate-400 hover:text-slate-200 transition-colors active:scale-95"
         @click="shiftDate(1)"
       >
-        <IconRenderer name="ChevronRight" :size="18" />
+        <IconRenderer name="ChevronRight" :size="17" />
       </button>
     </div>
 
@@ -81,31 +81,31 @@
     />
 
     <!-- Today's Progress Card -->
-    <div class="bg-gradient-to-r from-slate-900 via-slate-900 to-slate-850 border border-slate-800/80 rounded-2xl p-4 shadow-lg">
+    <div class="haute-glass rounded-2xl p-4 relative overflow-hidden">
       <div class="flex items-center justify-between mb-2.5">
         <div class="flex items-center space-x-2">
-          <div class="w-7 h-7 rounded-lg bg-emerald-500/20 text-emerald-400 flex items-center justify-center">
-            <IconRenderer name="Sparkles" :size="15" />
+          <div class="w-7 h-7 rounded-lg bg-emerald-500/15 text-emerald-400 flex items-center justify-center border border-emerald-500/20">
+            <IconRenderer name="Sparkles" :size="14" />
           </div>
           <span class="text-xs font-semibold text-slate-200">
-            {{ isToday ? '今日目标进度' : `${selectedDate} 达成度` }}
+            {{ isToday ? '今日自律进度' : `${selectedDate} 达成度` }}
           </span>
         </div>
-        <div class="text-xs font-bold text-emerald-400">
-          已完成 {{ dailyData.completedCount }} / {{ dailyData.totalCount }} ({{ dailyData.progressPercent }}%)
+        <div class="text-xs font-bold text-emerald-400 tabular-num">
+          {{ dailyData.completedCount }} / {{ dailyData.totalCount }} ({{ dailyData.progressPercent }}%)
         </div>
       </div>
 
       <!-- Progress bar -->
-      <div class="w-full bg-slate-950 h-2.5 rounded-full overflow-hidden border border-slate-800">
+      <div class="w-full bg-[#080a0f] h-2 rounded-full overflow-hidden border border-white/[0.06] p-0.5">
         <div
-          class="h-full bg-gradient-to-r from-emerald-500 to-teal-400 rounded-full transition-all duration-500 ease-out"
+          class="h-full bg-gradient-to-r from-emerald-500 via-teal-400 to-emerald-300 rounded-full transition-all duration-700 ease-out shadow-[0_0_10px_rgba(52,211,153,0.5)]"
           :style="{ width: `${dailyData.progressPercent}%` }"
         />
       </div>
 
-      <p v-if="dailyData.totalCount > 0 && dailyData.completedCount === dailyData.totalCount" class="text-[11px] text-emerald-400 font-medium mt-2 flex items-center gap-1">
-        🎉 太棒了！今天的所有事项已全部达成！
+      <p v-if="dailyData.totalCount > 0 && dailyData.completedCount === dailyData.totalCount" class="text-[11px] text-emerald-300 font-medium mt-2.5 flex items-center gap-1.5">
+        <span>✨ 太棒了！今日计划已全部圆满达成！</span>
       </p>
     </div>
 
@@ -114,16 +114,16 @@
       <button
         v-for="cat in filterCategories"
         :key="cat.value"
-        class="px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center space-x-1"
+        class="px-3 py-1.5 rounded-xl text-xs font-medium whitespace-nowrap transition-all flex items-center space-x-1 active:scale-95"
         :class="[
           selectedFilter === cat.value
-            ? 'bg-emerald-500 text-slate-950 font-bold shadow-md shadow-emerald-500/20'
-            : 'bg-slate-900/80 text-slate-400 border border-slate-800 hover:text-slate-200'
+            ? 'bg-white/[0.12] text-white border border-white/[0.2] shadow-sm font-semibold'
+            : 'bg-white/[0.03] text-slate-400 border border-white/[0.06] hover:text-slate-200 hover:border-white/[0.1]'
         ]"
         @click="selectedFilter = cat.value"
       >
         <span>{{ cat.label }}</span>
-        <span v-if="cat.count > 0" class="text-[10px] opacity-80">({{ cat.count }})</span>
+        <span v-if="cat.count > 0" class="text-[10px] opacity-70 tabular-num">({{ cat.count }})</span>
       </button>
     </div>
 

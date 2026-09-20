@@ -4,8 +4,8 @@
     <!-- Top Header -->
     <header class="flex items-center justify-between pt-1 pb-1">
       <div>
-        <h2 class="text-xl font-bold tracking-tight text-slate-100">
-          事项与习惯管理
+        <h2 class="text-xl font-bold tracking-tight text-white">
+          习惯事项管理
         </h2>
         <p class="text-xs text-slate-400 mt-0.5">
           配置重复规则、提醒时间与定量目标
@@ -15,53 +15,53 @@
       <div class="flex items-center space-x-2">
         <button
           type="button"
-          class="bg-slate-800 hover:bg-slate-700 text-slate-200 px-2.5 py-2 rounded-xl text-xs font-semibold flex items-center space-x-1 border border-slate-700/80 active:scale-95 transition-all"
-          title="重新添加 4 个经典默认事项"
+          class="bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white px-2.5 py-1.5 rounded-xl text-xs font-medium flex items-center space-x-1.5 border border-white/[0.08] active:scale-95 transition-all"
+          title="重新添加经典预设事项"
           @click="seedDefaults"
         >
-          <IconRenderer name="Sparkles" :size="14" class="text-amber-400" />
-          <span>恢复默认任务</span>
+          <IconRenderer name="Sparkles" :size="13" class="text-amber-400" />
+          <span>恢复预设</span>
         </button>
 
         <button
           type="button"
-          class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3 py-2 rounded-xl text-xs font-bold flex items-center space-x-1.5 shadow-md shadow-emerald-500/20 active:scale-95 transition-all"
+          class="bg-emerald-500 hover:bg-emerald-400 text-slate-950 px-3 py-1.5 rounded-xl text-xs font-bold flex items-center space-x-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)] active:scale-95 transition-all"
           @click="openAddModal"
         >
-          <IconRenderer name="Plus" :size="16" />
-          <span>新建事项</span>
+          <IconRenderer name="Plus" :size="15" :stroke-width="2.5" />
+          <span>新建</span>
         </button>
       </div>
     </header>
 
     <!-- Quick Template Bar -->
-    <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-3">
+    <div class="haute-glass rounded-2xl p-3.5">
       <div class="flex items-center justify-between mb-2">
         <span class="text-xs font-semibold text-slate-300 flex items-center gap-1.5">
-          <IconRenderer name="Zap" :size="14" class="text-amber-400" />
-          <span>快速添加常用任务</span>
+          <IconRenderer name="Zap" :size="13" class="text-amber-400" />
+          <span>常用习惯快捷模板</span>
         </span>
-        <span class="text-[11px] text-slate-500">点击直接创建</span>
+        <span class="text-[10px] text-slate-400">点击直接创建</span>
       </div>
       <div class="flex gap-2 overflow-x-auto no-scrollbar pb-1">
         <button
           v-for="tpl in quickPresets"
           :key="tpl.title"
           type="button"
-          class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-xs text-slate-200 whitespace-nowrap border border-slate-700/60 transition-all active:scale-95 flex-shrink-0"
+          class="flex items-center space-x-1.5 px-3 py-1.5 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-xs text-slate-200 whitespace-nowrap border border-white/[0.06] hover:border-white/[0.12] transition-all active:scale-95 flex-shrink-0"
           @click="createFromTemplate(tpl)"
         >
-          <IconRenderer :name="tpl.icon" :size="14" :class="getColorText(tpl.color)" />
+          <IconRenderer :name="tpl.icon" :size="13" :class="getColorText(tpl.color)" />
           <span>{{ tpl.title }}</span>
         </button>
       </div>
     </div>
 
     <!-- Habits Count & Helper banner -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 flex items-center justify-between text-xs">
+    <div class="bg-white/[0.02] border border-white/[0.05] rounded-2xl p-3 flex items-center justify-between text-xs">
       <div class="flex items-center space-x-2 text-slate-300">
-        <IconRenderer name="SlidersHorizontal" :size="16" class="text-emerald-400" />
-        <span>当前共有 <strong class="text-emerald-400 font-bold">{{ habits.length }}</strong> 项自律与重复事项</span>
+        <IconRenderer name="SlidersHorizontal" :size="14" class="text-emerald-400" />
+        <span>当前共配置 <strong class="text-emerald-400 font-bold tabular-num">{{ habits.length }}</strong> 项自律与周期事项</span>
       </div>
     </div>
 
@@ -71,8 +71,8 @@
       <span>加载配置列表中...</span>
     </div>
 
-    <div v-else-if="habits.length === 0" class="py-12 text-center bg-slate-900/40 border border-slate-800/60 rounded-2xl p-6">
-      <div class="w-12 h-12 rounded-2xl bg-slate-800/80 text-slate-500 flex items-center justify-center mx-auto mb-3">
+    <div v-else-if="habits.length === 0" class="py-12 text-center bg-white/[0.02] border border-white/[0.06] rounded-2xl p-6">
+      <div class="w-12 h-12 rounded-2xl bg-white/[0.04] text-slate-500 flex items-center justify-center mx-auto mb-3">
         <IconRenderer name="PlusCircle" :size="24" />
       </div>
       <p class="text-sm font-medium text-slate-300">还没有配置任何事项</p>
@@ -85,26 +85,23 @@
       </button>
     </div>
 
-    <div v-else class="space-y-3">
+    <div v-else class="space-y-2.5">
       <div
         v-for="habit in habits"
         :key="habit.id"
-        class="bg-slate-900/90 border border-slate-800/90 rounded-2xl p-4 shadow-md backdrop-blur-sm relative overflow-hidden group hover:border-slate-700 transition-all"
+        class="haute-glass rounded-2xl p-3.5 relative overflow-hidden group hover:border-white/[0.14] transition-all"
       >
-        <!-- Left color bar -->
-        <div class="absolute top-0 bottom-0 left-0 w-1.5" :class="getColorAccent(habit.color)" />
-
-        <div class="flex items-start justify-between gap-3 pl-2">
+        <div class="flex items-center justify-between gap-3">
           
           <!-- Icon & Details -->
-          <div class="flex items-start space-x-3 flex-1 min-w-0">
+          <div class="flex items-center space-x-3 flex-1 min-w-0">
             <div class="w-10 h-10 rounded-xl flex items-center justify-center flex-shrink-0" :class="getIconBg(habit.color)">
-              <IconRenderer :name="habit.icon" :size="20" />
+              <IconRenderer :name="habit.icon" :size="18" />
             </div>
 
             <div class="flex-1 min-w-0">
               <div class="flex items-center space-x-2">
-                <h4 class="font-semibold text-sm text-slate-100 truncate">
+                <h4 class="font-semibold text-sm text-slate-100 truncate group-hover:text-white">
                   {{ habit.title }}
                 </h4>
               </div>
@@ -114,7 +111,7 @@
                 <!-- Type badge -->
                 <span
                   v-if="habit.type === 'time_slot' && habit.start_time"
-                  class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-sky-950/80 text-sky-400 border border-sky-800/50 flex items-center gap-1"
+                  class="text-[9px] font-medium px-2 py-0.5 rounded-md bg-white/[0.04] text-sky-300/90 border border-white/[0.06] flex items-center gap-1 tabular-num"
                 >
                   <IconRenderer name="Clock" :size="10" />
                   {{ habit.start_time }}{{ habit.end_time ? ' - ' + habit.end_time : '' }}
@@ -122,15 +119,15 @@
 
                 <span
                   v-else-if="habit.type === 'reminder_window'"
-                  class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-rose-950/80 text-rose-400 border border-rose-800/50 flex items-center gap-1"
+                  class="text-[9px] font-medium px-2 py-0.5 rounded-md bg-white/[0.04] text-rose-300/90 border border-white/[0.06] flex items-center gap-1 tabular-num"
                 >
                   <IconRenderer name="Bell" :size="10" />
-                  {{ habit.start_time ? habit.start_time + '起提醒' : '' }} {{ habit.target_time ? habit.target_time + '前服药' : '' }}
+                  {{ habit.start_time ? habit.start_time + '起' : '' }} {{ habit.target_time ? habit.target_time + '前' : '' }}
                 </span>
 
                 <span
                   v-else-if="habit.type === 'quantified_log'"
-                  class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-amber-950/80 text-amber-400 border border-amber-800/50 flex items-center gap-1"
+                  class="text-[9px] font-medium px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-300 border border-amber-500/20 flex items-center gap-1"
                 >
                   <IconRenderer name="BookOpen" :size="10" />
                   自由阅读定量
@@ -138,41 +135,37 @@
 
                 <span
                   v-else-if="habit.type === 'abstinence'"
-                  class="text-[10px] font-medium px-2 py-0.5 rounded-full bg-purple-950/80 text-purple-400 border border-purple-800/50 flex items-center gap-1"
+                  class="text-[9px] font-medium px-2 py-0.5 rounded-md bg-purple-500/10 text-purple-300 border border-purple-500/20 flex items-center gap-1"
                 >
                   <IconRenderer name="ShieldCheck" :size="10" />
-                  自律戒断
+                  自律防戒
                 </span>
 
                 <!-- Repeat rule badge -->
-                <span class="text-[10px] text-slate-400 bg-slate-800 px-1.5 py-0.5 rounded">
+                <span class="text-[9px] text-slate-400 bg-white/[0.03] border border-white/[0.05] px-1.5 py-0.5 rounded">
                   {{ formatRepeatRule(habit) }}
                 </span>
               </div>
-
-              <p v-if="habit.description" class="text-xs text-slate-400 mt-1.5 line-clamp-1">
-                {{ habit.description }}
-              </p>
             </div>
           </div>
 
           <!-- Edit / Delete actions -->
-          <div class="flex items-center space-x-1 flex-shrink-0">
+          <div class="flex items-center space-x-1.5 flex-shrink-0">
             <button
               type="button"
-              class="w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors"
+              class="w-8 h-8 rounded-xl bg-white/[0.04] hover:bg-white/[0.08] text-slate-300 hover:text-white flex items-center justify-center border border-white/[0.06] transition-colors active:scale-95"
               title="编辑"
               @click="openEditModal(habit)"
             >
-              <IconRenderer name="Edit3" :size="15" />
+              <IconRenderer name="Edit3" :size="14" />
             </button>
             <button
               type="button"
-              class="w-8 h-8 rounded-xl bg-slate-800/80 hover:bg-rose-500/20 text-slate-400 hover:text-rose-400 flex items-center justify-center transition-colors"
+              class="w-8 h-8 rounded-xl bg-white/[0.04] hover:bg-rose-500/15 text-slate-400 hover:text-rose-300 flex items-center justify-center border border-white/[0.06] hover:border-rose-500/30 transition-colors active:scale-95"
               title="删除"
               @click="handleDelete(habit)"
             >
-              <IconRenderer name="Trash2" :size="15" />
+              <IconRenderer name="Trash2" :size="14" />
             </button>
           </div>
 
@@ -360,13 +353,13 @@ const getColorAccent = (color: string) => {
 
 const getIconBg = (color: string) => {
   switch (color) {
-    case 'sky': return 'bg-sky-500/10 text-sky-400 border border-sky-500/20'
-    case 'emerald': return 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20'
-    case 'rose': return 'bg-rose-500/10 text-rose-400 border border-rose-500/20'
-    case 'amber': return 'bg-amber-500/10 text-amber-400 border border-amber-500/20'
-    case 'purple': return 'bg-purple-500/10 text-purple-400 border border-purple-500/20'
-    case 'indigo': return 'bg-indigo-500/10 text-indigo-400 border border-indigo-500/20'
-    default: return 'bg-slate-800 text-slate-300'
+    case 'sky': return 'bg-sky-400/10 text-sky-300 ring-1 ring-sky-400/20'
+    case 'emerald': return 'bg-emerald-400/10 text-emerald-300 ring-1 ring-emerald-400/20'
+    case 'rose': return 'bg-rose-400/10 text-rose-300 ring-1 ring-rose-400/20'
+    case 'amber': return 'bg-amber-400/10 text-amber-300 ring-1 ring-amber-400/20'
+    case 'purple': return 'bg-purple-400/10 text-purple-300 ring-1 ring-purple-400/20'
+    case 'indigo': return 'bg-indigo-400/10 text-indigo-300 ring-1 ring-indigo-400/20'
+    default: return 'bg-white/[0.05] text-slate-300 ring-1 ring-white/[0.08]'
   }
 }
 </script>
