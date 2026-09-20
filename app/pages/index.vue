@@ -72,10 +72,11 @@
       </button>
     </div>
 
-    <!-- GitHub-Style Contribution Heatmap -->
+    <!-- Heatmap & Completion Timeline Card -->
     <HeatmapGraph
       :days="heatmapDays"
       :selected-date="selectedDate"
+      :timeline-tasks="dailyData.items"
       @select-date="onSelectHeatmapDate"
     />
 
