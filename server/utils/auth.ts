@@ -18,7 +18,7 @@ export function generateToken(user: { id: number; username: string }): string {
   return jwt.sign(
     { id: user.id, username: user.username },
     JWT_SECRET,
-    { expiresIn: '30d' }
+    { expiresIn: '60d' }
   )
 }
 
@@ -35,7 +35,7 @@ export function setAuthCookie(event: H3Event, token: string) {
     httpOnly: true,
     secure: false, // Set to false to support plain HTTP / IP access
     sameSite: 'lax',
-    maxAge: 60 * 60 * 24 * 30, // 30 days
+    maxAge: 60 * 60 * 24 * 60, // 60 days (2 months)
     path: '/'
   })
 }
