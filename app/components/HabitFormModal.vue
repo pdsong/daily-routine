@@ -327,17 +327,6 @@ const weekDaysList = [
 
 const templates = [
   {
-    title: '英语跟读任务',
-    category: 'study',
-    type: 'time_slot',
-    start_time: '08:00',
-    end_time: '08:30',
-    icon: 'Headphones',
-    color: 'sky',
-    description: '晨间跟读英语口语 30 分钟',
-    repeat_type: 'daily'
-  },
-  {
     title: '晨跑任务',
     category: 'fitness',
     type: 'time_slot',

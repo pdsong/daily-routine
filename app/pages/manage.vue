@@ -220,17 +220,6 @@ onMounted(() => {
 
 const quickPresets = [
   {
-    title: '英语跟读任务',
-    category: 'study',
-    type: 'time_slot',
-    start_time: '08:00',
-    end_time: '08:30',
-    icon: 'Headphones',
-    color: 'sky',
-    description: '晨间专注跟读发音 30 分钟',
-    repeat_type: 'daily'
-  },
-  {
     title: '晨跑运动',
     category: 'fitness',
     type: 'time_slot',
@@ -277,7 +266,7 @@ const createFromTemplate = async (tpl: any) => {
 }
 
 const seedDefaults = async () => {
-  if (confirm('是否添加/补齐 4 项经典预设事项（英语跟读、晨跑、深度阅读、自律断舍离）？')) {
+  if (confirm('是否添加/补齐 3 项经典预设事项（晨跑、深度阅读、自律断舍离）？')) {
     try {
       loading.value = true
       await $fetch('/api/habits/seed-defaults', { method: 'POST' })

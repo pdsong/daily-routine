@@ -138,23 +138,6 @@ export function seedDefaultHabits(userId: number) {
   const defaultTasks = [
     {
       user_id: userId,
-      title: '英语跟读任务',
-      description: '晨间专注跟读发音与口语材料 30 分钟',
-      icon: 'Headphones',
-      color: 'sky',
-      category: 'study',
-      type: 'time_slot',
-      start_time: '08:00',
-      end_time: '08:30',
-      target_time: null,
-      target_metric: 'minutes',
-      target_value: 30,
-      repeat_type: 'daily',
-      repeat_days: '1,2,3,4,5,6,7',
-      sort_order: 1
-    },
-    {
-      user_id: userId,
       title: '晨跑运动',
       description: '每天早晨跑步健身，强健体魄',
       icon: 'Flame',
@@ -168,7 +151,7 @@ export function seedDefaultHabits(userId: number) {
       target_value: 60,
       repeat_type: 'daily',
       repeat_days: '1,2,3,4,5,6,7',
-      sort_order: 2
+      sort_order: 1
     },
     {
       user_id: userId,
@@ -185,7 +168,7 @@ export function seedDefaultHabits(userId: number) {
       target_value: 20,
       repeat_type: 'daily',
       repeat_days: '1,2,3,4,5,6,7',
-      sort_order: 3
+      sort_order: 2
     },
     {
       user_id: userId,
@@ -202,7 +185,7 @@ export function seedDefaultHabits(userId: number) {
       target_value: null,
       repeat_type: 'daily',
       repeat_days: '1,2,3,4,5,6,7',
-      sort_order: 4
+      sort_order: 3
     }
   ]
 

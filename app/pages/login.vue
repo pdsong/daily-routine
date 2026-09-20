@@ -99,7 +99,7 @@
         <!-- Feature hints for new users -->
         <div class="mt-6 pt-4 border-t border-slate-800/80 text-center text-slate-400 text-xs">
           <p v-if="!isLoginMode" class="text-[11px] text-emerald-400/90">
-            ✨ 注册后将自动预置：英语跟读、晨跑、服药提醒、阅读等专属任务
+            ✨ 注册后将自动预置：晨跑运动、深度阅读、自律断舍离等专属任务
           </p>
           <p v-else class="text-[11px]">
             轻量 SQLite 本地存储 · 安全私密
