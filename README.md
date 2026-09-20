@@ -52,7 +52,7 @@ pnpm install
 ```bash
 pnpm dev
 ```
-启动后在浏览器或手机浏览器打开：`http://localhost:3300` (或局域网 IP 如 `http://192.168.x.x:3300`)
+启动后在浏览器或手机浏览器打开：`http://localhost:9990` (或服务器/局域网 IP 如 `http://43.153.145.181:9990`)
 
 ### 生产构建与运行
 ```bash
